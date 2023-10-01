@@ -6,13 +6,11 @@ import {
   WalletProvider,
 } from "@solana/wallet-adapter-react";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
+import { MoongateWalletAdapter } from "@moongate/moongate-adapter";
 import {
-  BackpackWalletAdapter,
   CoinbaseWalletAdapter,
-  GlowWalletAdapter,
   PhantomWalletAdapter,
   SolflareWalletAdapter,
-  SolletExtensionWalletAdapter,
   TokenaryWalletAdapter,
   TorusWalletAdapter,
 } from "@solana/wallet-adapter-wallets";
@@ -32,13 +30,11 @@ const WalletContext: FC<{ children: ReactNode }> = ({ children }) => {
   const endpoint = useMemo(() => clusterApiUrl(network), [network]);
   const wallets = useMemo(
     () => [
-      new BackpackWalletAdapter(),
       new CoinbaseWalletAdapter(),
-      new GlowWalletAdapter(),
       new PhantomWalletAdapter(),
       new SolflareWalletAdapter(),
-      new SolletExtensionWalletAdapter(),
       new TorusWalletAdapter(),
+      new MoongateWalletAdapter(),
       new TokenaryWalletAdapter(),
     ],
     []

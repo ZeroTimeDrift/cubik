@@ -5,7 +5,7 @@ import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 import { motion } from "framer-motion";
 import Image from "next/legacy/image";
 import Link from "next/link";
-
+import { AuthModal } from "@moongate/wallet-wrapper-sdk";
 import {
   MouseParallaxChild,
   MouseParallaxContainer,
@@ -59,7 +59,8 @@ const BackgroundImageWrapper = ({
 };
 
 const LandingPage = () => {
-  const { setVisible } = useWalletModal();
+  const { select, connected } = useWallet();
+  const { visible, setVisible } = useWalletModal();
   const wallet = useWallet();
   return (
     <Container mt="4.5rem" background="black" maxW="full" px="0">
@@ -210,13 +211,11 @@ const LandingPage = () => {
                 }}
               >
                 {!wallet.connected && (
-                  <Button
-                    onClick={() => setVisible(true)}
-                    variant="cubikFilled"
-                    size="cubikMedium"
-                  >
-                    Connect Wallet
-                  </Button>
+                  <AuthModal
+                    select={select}
+                    connected={connected}
+                    setVisible={setVisible}
+                  />
                 )}
                 <Link href="/projects">
                   <Button
